@@ -1,94 +1,59 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ข้อความลับ</title>
+<title>ใส่รหัส</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #dff2ff;
-    font-family: sans-serif;
-    color: #2b4a66;
+  :root { --bg:#fff5f7; --card:#ffffff; --text:#3a2a30; --accent:#e5658a; --muted:#9a8890; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1d1418; --card:#2a1d23; --text:#f6e9ee; --accent:#ff7fa3; --muted:#b9a3ac; }
   }
-  .box {
-    background: #ffffff;
-    border: 3px solid #b9dcf5;
-    border-radius: 28px;
-    padding: 30px 22px;
-    width: 90%;
-    max-width: 380px;
-    text-align: center;
-  }
-  h1 { font-size: 24px; margin: 0 0 8px; }
-  p { margin: 0 0 20px; color: #6f8fa8; }
-  input {
-    width: 70px;
-    height: 85px;
-    font-size: 38px;
-    text-align: center;
-    border: 3px solid #b9dcf5;
-    border-radius: 20px;
-    margin: 0 6px;
-    color: #2b4a66;
-  }
-  button {
-    margin-top: 20px;
-    background: #5ab4ee;
-    color: #ffffff;
-    border: 0;
-    border-radius: 999px;
-    padding: 12px 34px;
-    font-size: 18px;
-  }
-  #error { color: #e0627a; min-height: 24px; margin-top: 12px; }
-  #message { display: none; text-align: left; line-height: 1.9; font-size: 18px; }
-  #message .end { display: block; text-align: center; margin-top: 16px; font-weight: bold; color: #5ab4ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--bg); color:var(--text); font-family:'Sarabun',sans-serif; padding:20px; }
+  .card { background:var(--card); width:100%; max-width:460px; padding:32px 24px; border-radius:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,.1); text-align:center; }
+  h1 { font-size:1.3rem; margin:0 0 16px; }
+  input { width:100%; font:inherit; font-size:1.2rem; text-align:center; padding:12px; border-radius:12px;
+    border:2px solid var(--muted); background:transparent; color:var(--text); }
+  input:focus { outline:none; border-color:var(--accent); }
+  button { margin-top:14px; width:100%; font:inherit; font-weight:600; font-size:1.05rem; padding:12px;
+    border:0; border-radius:12px; background:var(--accent); color:#fff; cursor:pointer; }
+  .err { color:#e5484d; min-height:1.4em; margin-top:10px; font-size:.95rem; }
+  #message { display:none; text-align:left; line-height:1.9; font-size:1.1rem; white-space:pre-line; }
 </style>
 </head>
 <body>
-  <div class="box">
-
-    <div id="lock">
-      <div style="font-size:48px">🔐</div>
-      <h1>ใส่รหัส 2 หลักนะ</h1>
-      <p>พิมพ์ตัวเลขเพื่อเปิดอ่านข้อความ</p>
-      <input id="a" type="tel" maxlength="1">
-      <input id="b" type="tel" maxlength="1">
-      <div id="error"></div>
-      <button onclick="check()">เปิดอ่านเลย</button>
-    </div>
-
-    <div id="message">
-      คืองี้ใช่ไหม คือเมื่อวานก่อนอ่ะเราบ่นกับพ่อแม่ว่า เราอยากได้รถ และทีนี้พ่อแม่เราก็พูดว่า “เดี๋ยวพรุ่งนี้พาไปซื้อรถนะ” และทีนี้วันนี้เราก็มาซื้อรถจริงๆ มีหลายคันมาก เลือกไม่ถูกเลยแหละ แบบมันหลายคันจริงๆ แต่เรามีคันที่ชอบนะ คันถึงเธอทุกวิด
-      <span class="end">“คิดถึงเธอทุกวัน” &gt;&lt; 🩵</span>
-    </div>
-
+<div class="card">
+  <div id="gate">
+    <h1>ใส่รหัสก่อนนะ 🔒</h1>
+    <input id="code" type="password" inputmode="numeric" placeholder="รหัส" autocomplete="off">
+    <button id="btn">ยืนยัน</button>
+    <div class="err" id="err"></div>
   </div>
-
+  <div id="message">คืองี้ใช่ไหม คือเมื่อวานก่อนอ่ะเราบ่นกับพ่อแม่ว่า เราอยากได้รถ และที่นี้พ่อแม่เราก็
+พูดว่า เดียวพรุ่งนีพาไปซื้อรถนะ และที่นี้วัน
+นีเราก็มาซื่อรถจริงๆ มีหลายคันมาก เร
+เลือกไม่ถูกเลยแหละ แบบมันหลายคันจริงๆแต่เรามีคันที่ชอบนะคันถึงเธอทุกวิด
+"คิดถึงเธอทุกวัน"&gt;&lt;</div>
+</div>
 <script>
-  var PASSCODE = "67";
-
-  document.getElementById("a").addEventListener("input", function () {
-    if (this.value.length === 1) document.getElementById("b").focus();
-  });
-
+  const PASSWORD = "67";
+  const input = document.getElementById("code");
   function check() {
-    var code = document.getElementById("a").value + document.getElementById("b").value;
-    if (code === PASSCODE) {
-      document.getElementById("lock").style.display = "none";
+    if (input.value.trim() === PASSWORD) {
+      document.getElementById("gate").style.display = "none";
       document.getElementById("message").style.display = "block";
     } else {
-      document.getElementById("error").textContent = "รหัสไม่ถูกนะ ลองใหม่อีกครั้ง";
-      document.getElementById("a").value = "";
-      document.getElementById("b").value = "";
-      document.getElementById("a").focus();
+      document.getElementById("err").textContent = "รหัสไม่ถูกนะ ลองใหม่";
+      input.value = "";
+      input.focus();
     }
   }
+  document.getElementById("btn").addEventListener("click", check);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") check(); });
 </script>
 </body>
 </html>
