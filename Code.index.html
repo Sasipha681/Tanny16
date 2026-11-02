@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ข้อความลับ</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dff2ff;
+    font-family: sans-serif;
+    color: #2b4a66;
+  }
+  .box {
+    background: #ffffff;
+    border: 3px solid #b9dcf5;
+    border-radius: 28px;
+    padding: 30px 22px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+  }
+  h1 { font-size: 24px; margin: 0 0 8px; }
+  p { margin: 0 0 20px; color: #6f8fa8; }
+  input {
+    width: 70px;
+    height: 85px;
+    font-size: 38px;
+    text-align: center;
+    border: 3px solid #b9dcf5;
+    border-radius: 20px;
+    margin: 0 6px;
+    color: #2b4a66;
+  }
+  button {
+    margin-top: 20px;
+    background: #5ab4ee;
+    color: #ffffff;
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 34px;
+    font-size: 18px;
+  }
+  #error { color: #e0627a; min-height: 24px; margin-top: 12px; }
+  #message { display: none; text-align: left; line-height: 1.9; font-size: 18px; }
+  #message .end { display: block; text-align: center; margin-top: 16px; font-weight: bold; color: #5ab4ee; }
+</style>
+</head>
+<body>
+  <div class="box">
+
+    <div id="lock">
+      <div style="font-size:48px">🔐</div>
+      <h1>ใส่รหัส 2 หลักนะ</h1>
+      <p>พิมพ์ตัวเลขเพื่อเปิดอ่านข้อความ</p>
+      <input id="a" type="tel" maxlength="1">
+      <input id="b" type="tel" maxlength="1">
+      <div id="error"></div>
+      <button onclick="check()">เปิดอ่านเลย</button>
+    </div>
+
+    <div id="message">
+      คืองี้ใช่ไหม คือเมื่อวานก่อนอ่ะเราบ่นกับพ่อแม่ว่า เราอยากได้รถ และทีนี้พ่อแม่เราก็พูดว่า “เดี๋ยวพรุ่งนี้พาไปซื้อรถนะ” และทีนี้วันนี้เราก็มาซื้อรถจริงๆ มีหลายคันมาก เลือกไม่ถูกเลยแหละ แบบมันหลายคันจริงๆ แต่เรามีคันที่ชอบนะ คันถึงเธอทุกวิด
+      <span class="end">“คิดถึงเธอทุกวัน” &gt;&lt; 🩵</span>
+    </div>
+
+  </div>
+
+<script>
+  var PASSCODE = "67";
+
+  document.getElementById("a").addEventListener("input", function () {
+    if (this.value.length === 1) document.getElementById("b").focus();
+  });
+
+  function check() {
+    var code = document.getElementById("a").value + document.getElementById("b").value;
+    if (code === PASSCODE) {
+      document.getElementById("lock").style.display = "none";
+      document.getElementById("message").style.display = "block";
+    } else {
+      document.getElementById("error").textContent = "รหัสไม่ถูกนะ ลองใหม่อีกครั้ง";
+      document.getElementById("a").value = "";
+      document.getElementById("b").value = "";
+      document.getElementById("a").focus();
+    }
+  }
+</script>
+</body>
+</html>
